@@ -13,7 +13,7 @@ var questions = ["How many miles between the Earth and Moon?",
 $("#start-button").click(function() {
 console.log("This button will start the game");
 // displays first question in the questions array
-$("question-display").text(questions[0]);
+$("#question-display").text(questions[0]);
 // calls the set timeout function that ends the round 
 setTimeout(RoundTimeout, roundTime) 
 // calls the function that displays new questions on an interval
