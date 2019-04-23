@@ -1,0 +1,36 @@
+body, html  {border-style: solid;
+    border-width: 3px;
+    border-color: red;
+    height: 100%;
+    background-image:url("https://www.jpl.nasa.gov/spaceimages/images/wallpaper/PIA14417-640x350.jpg");
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0px;
+}
+    
+div { border-style: solid;
+        border-width: 3px;
+        border-color: darkgreen;
+        
+}
+    
+.container { border-style : solid;
+        border-width: 5px;
+        border-color: peru;
+}
+
+.trivia-question { height: 200px;
+    width: 400px;
+}
+
+.main-row { border-style: solid;
+    border-width: 5px;
+    border-color: blue;
+}
+
+.btn {background-color: grey;
+align-items: center;}
+
+#round-timer { color: hotpink;}
