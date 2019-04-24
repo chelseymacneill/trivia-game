@@ -1,100 +1,142 @@
 $(document).ready(function() {
   
   //Variables
-  var roundTime = 60; // Time allowed for 1 round
-  var questionTime = 2000;
-  var questions = ["How many miles between the Earth and Moon?", 
-  "What galaxy is the earth in?",
-  "What did scientist recently capture a picture of?",
-  "Question here",
-  "Another question here"]
-  var clockRunning = false;
-  var roundIntervalId;
+  
+  // An array of objects that hold each question, answer options, answers, and correct answer image
+  var questionsAndAnswers = [{
+    question: "What type of farm does Dwight own?",
+    answer: ["A Beetle Farm", "An Artichoke Farm", "A Beet Farm", "A Bumblebee Farm"],
+    correct: "2",
+    image: ("assets/images/dwight_beets.png")
+  }, {
+    question: "What name did Pam and Angela fight over for their babies?",
+    answer: ["Charles", "Phillip", "William", "Ace"],
+    correct: "2",
+    image: ("assets//images/pamandangela.jpg")
+  }, {
+    question: "Which of Angela's cats does Dwight freeze?",
+    answer: ["Sparkles", "Sprinkles", "Fluffy", "Cupcake"],
+    correct: "1",
+    image: ("assets//images/angelaands.jpg")
+  }];
+  
+  // User starts the game with zeros 
+  var correctAnswers = 0;
+  var incorrectAnswers = 0;
+  var unansweredQuestions = 0;
+  var timeRemaining = 16;
+  var intervalID;
+  var questionIndex = 0;
+  var answered = false // used to control the timer based on user answereing
+  var correct;
   
   
-  // When a user clicks on a button it should start a new game.
+  //==================== Function Delclarations ===============================
   
-  $("#start-button").click(function() {
-    console.log("This button will start the game");
+  
+  function startGame() {
+    console.log("The game has begun") 
+    // reset user stats to zeros
+    correctAnswers = 0;
+    incorrectAnswers = 0;
+    unansweredQuestions = 0;
+    loadQuestionsAndAnswers()
     
-    // displays first question in the questions array
-    $("#question-display").text(questions[0]);
-    
-    // calls the set timeout function that ends the round 
-    setTimeout(RoundTimeout, roundTime) 
-    
-    // calls the function that displays new questions on an interval
-    setInterval(newQuestionTimer, questionTime)
-    
-    // start the count and set clock to running
-    if (!clockRunning) {
-      roundintervalId = setInterval(count, 1000);
-      clockRunning = true;
+  }
+  
+  function loadQuestionsAndAnswers () { 
+    answered = false;
+    timeRemaining = 16;
+    intervalID = setInterval(timer, 1000); 
+    if (answered === false) {
+      timer();
     }
+    correct = questionsAndAnswers[questionIndex].correct;
+    var question = questionsAndAnswers[questionIndex].question;
+    $('.question-display').html(question);
+    for (var i = 0; i < 4; i++) {
+      var answer = questionsAndAnswers[questionIndex].answer[i];
+      $('.answer-display').append('<h4 class= answersAll id=' + i + '>' + answer + '</h4>');
+    }
+    
+    $("h4").click(function () {
+      var id = $(this).attr('id');
+      if(id === corect) {
+        answered = true; // This flips the timer off
+        $('.question-display').text("The answer is:" + questionsAndAnswers[questionIndex].answer[correct]);
+        // calls the correct answer function
+        correctAnswers();
+      } else {
+        answered = true; // This flips the timer off
+        $('question-display').text("Your answer was : " + questionsAndAnswers[questionIndex].answer[id] + "but thats wrong the right answer is" +  questionsAndAnswers[questionIndex].answer[correct]);
+        // calls the wrong answer function 
+        incorrectAnswer();
+      }
+    });
+  }
+
+// 
+  function timer() {
+    if (timeRemaining === 0) {
+        answered = true;
+        clearInterval(intervalID);
+        $('.question-display').text("THE CORRECT ANSWER IS: " + questionsAndAnswers[questionIndex].answer[correct]);
+        unAnswered();
+    } else if (answered === true) {
+        clearInterval(intervalID);
+    } else {
+        timeRemaining--;
+        $('.timeRemaining').text('YOU HAVE ' + timeRemaining + ' SECONDS TO CHOOSE');
+    }
+}
+  
+  // Function gets called when a user answers correctly
+  function correctAnswers() {
+    //increments correct answers 
+    correctAnswers++;
+    $('.timeRemaining').text("You're so right").css({'color': '#3D414F'});
+    resetRound();
+  }
+  
+  // Function gets called when a user answers incorrectly 
+  function incorrectAnswer() {
+    incorrectAnswers++;
+    $('.timeRemaining').text("You're wrong!!").css({'color': '#3D414F'});
+    resetRound();
+  }
+  
+  // Function that calculates unanswered questions
+  function unAnswered() {
+    unansweredQuestions++;
+    $('.timeRemaining').text("You failed to choose in time!!").css({'color': '#3D414F'});
+    resetRound();
+  }
+  
+  
+  // Function to reset to a new round
+  function resetRound() {
+    $('.answersAll').remove();
+    $('.answer-display').append('<img class=answerImage width="150" height="150" src="' + questionsAndAnswers[questionIndex].image + '">');
+    questionIndex++ // 
+    if (questionIndex < questionsAndAnswers.length) {
+      setTimeout(function () {
+        loadQuestionsAndAnswers();
+        $('.answerImage').remove();
+        $('.timeRemaining').remove();
+        $('.answers').append('<h4 class= answersAll end>CORRECT ANSWERS: ' + correctAnswers + '</h4>');
+        $('.answers').append('<h4 class= answersAll end>CORRECT ANSWERS: ' + correctAnswers + '</h4>');
+        $('.answers').append('<h4 class= answersAll end>CORRECT ANSWERS: ' + correctAnswers + '</h4>');
+        setTimeout(function () {
+          location.reload();
+        },7000); // CHANGE : Make this a variable instead of hard coding it.
+      }, 5000); // CHANGE : Make this a variable instead of hard coding it.
+    }
+  };
+
+  $('.startButton').on("click",function () {
+    $('.startButton');
+    startGame();
   });
-  
-  // 
-  function count() {
-    
-    // DONE: decrement time by 1
-    roundTime--;
-    
-    //  Get the current time, pass that into the timeConverter function and save the result in a variable.
-    var converted = timeConverter(roundTime);
-    console.log(converted);
-    
-    // Use the variable we just created to show the converted time in the "display" div.
-    $("#round-timer").text(converted);
-  }
-  
-  function timeConverter(t) {
-    
-    var minutes = Math.floor(t / 60);
-    var seconds = t - (minutes * 60);
-    
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-    
-    if (minutes === 0) {
-      minutes = "00";
-    }
-    else if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    
-    return minutes + ":" + seconds;
-  }
-  
-  // Function used to keep track of the round (is called when start button is pushed.)
-  function RoundTimeout() {
-    
-    // When time is up display times up!
-    $("#round-timer").text("Times Up")
-  };
-  
-  
-  // Have the new question timer display a new question that it grabs from an array on each interval (is called when start button is pressed)
-  function newQuestionTimer() {
-    questionIndex = 1;
-    $("#question-display").fadeIn().text(questions[questionIndex]);
-    questionIndex = questionIndex < questions.length - 1 ? questionIndex + 1 : 0;
-  };
-  
-  
-  
-  
-  // This needs to repeat until the timer runs out. 
-  
-  // The start of the game starts a game round timer 30 seconds, a question timer, and displays the first question. 
-  
-  
-  // If the users chooses the correct answer they get a message that says correct and a picture or gif of the correct answer
-  
-  // If the user chooses an incorrect answer they get a message saying they were wrong, what the right message was and a picture of the right answer.
-  
-  // After the time runs up on that round the total wins, losses will be displayed along with a button asking if they want to play again. 
-  
   
   
 }); // closes the document ready function

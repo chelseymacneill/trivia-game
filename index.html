@@ -19,37 +19,27 @@
     
 </head>
 <body>
-    <div class="container">
-        <div class="main-row">
-            <div class="col-1">
-                
-            </div>
-            <div class="col-10">
-                
-                <button type="button" class="btn btn-dark" id="start-button"> Start Game </button>
-                <!-- Update this to show the clock counting down-->
-                <div id="round-timer">
-                    <h6> 00:00 </h6>
-            
+    <div id="wrapper">
+        <div id="gradient">
+          <div class="container">
+            <section class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="jumbotron animated zoomIn">
+                  <h1>Adventure Trivia!</h1>
+                  <h5 class="timeRemaining"></h5>
+                  <h3 class="question-display questionHeader"></h3>
+                  <div class="answer-display"></div>
+                  <p class="start-button text-center animated zoomInDown">
+                    <a class="btn btn-primary btn-lg startButton animated pulse infinite" href="#" role="button">
+                      <span class="glyphicon glyphicon-off"></span>
+                    </a>
+                  </p>
                 </div>
-                <!-- This is where the questions will pop up-->
-                <div id="question-display">
-                        
-                
-                    </div>
-                
-                
-            </div>
-            <div class="trivia-question">
-                
-            </div>
-            
+              </div>
+            </section>
+          </div>
         </div>
-        <div class="col-1">
-            
-        </div>
-    </div>
-</div>
+      </div>
 
 </body>
 </html>
