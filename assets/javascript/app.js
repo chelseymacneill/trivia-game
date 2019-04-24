@@ -41,16 +41,19 @@ $(document).ready(function() {
     incorrectAnswers = 0;
     unansweredQuestions = 0;
     loadQuestionsAndAnswers()
+    // 
+    $('.startButton').remove();
     
   }
   
   function loadQuestionsAndAnswers () { 
     answered = false;
-    timeRemaining = 16;
+    timeRemaining = 16; 
     intervalID = setInterval(timer, 1000); 
     if (answered === false) {
       timer();
     }
+
     correct = questionsAndAnswers[questionIndex].correct;
     var question = questionsAndAnswers[questionIndex].question;
     $('.question-display').html(question);
@@ -101,12 +104,13 @@ $(document).ready(function() {
   // Function gets called when a user answers incorrectly 
   function incorrectAnswer() {
     incorrectAnswers++;
+    console.log(incorrectAnswers)
     $('.timeRemaining').text("You're wrong!!").css({'color': '#3D414F'});
     resetRound();
   }
   
-  // Function that calculates unanswered questions
-  function unAnswered() {
+  // Function that 
+  function unansweredQuestions() {
     unansweredQuestions++;
     $('.timeRemaining').text("You failed to choose in time!!").css({'color': '#3D414F'});
     resetRound();
@@ -134,7 +138,6 @@ $(document).ready(function() {
   };
 
   $('.startButton').on("click",function () {
-    $('.startButton');
     startGame();
   });
   
