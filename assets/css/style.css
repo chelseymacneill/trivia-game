@@ -1,40 +1,37 @@
-body, html  {border-style: solid;
+html, body  {border-style: solid;
     border-width: 3px;
     border-color: red;
     height: 100%;
-    background-image:url("https://www.jpl.nasa.gov/spaceimages/images/wallpaper/PIA14417-640x350.jpg");
-    /* Center and scale the image nicely */
-    background-position: center;
+    background-image:url("https://image.freepik.com/free-vector/abstract-vector-background-with-flying-falling-scattered-office-white-paper-sheets-documents_53562-2882.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
-    padding: 0px;
-}
-    
-div { border-style: solid;
-        border-width: 3px;
-        border-color: darkgreen;
-        
-}
-    
-.container { border-style : solid;
-        border-width: 5px;
-        border-color: peru;
+    background-size: 100% auto;
 }
 
-.trivia-question { height: 200px;
-    width: 400px;
+.col {
+    text-align: center;
 }
 
-.main-row { border-style: solid;
-    border-width: 5px;
+.container { border-style: solid;
+    border-width: 3px;
     border-color: blue;
+    height: 100%;
 }
 
-.btn {background-color: grey;
-align-items: center;}
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    display: flex;
+    align-items: center;
+  }
 
-#round-timer { color: hotpink;}
+.row { border-style: solid;
+    border-width: 3px;
+    border-color: pink;
+    margin: 20px;
+}
 
-#question-display { color: white;
+.main-content { border-style: solid;
+    border-width: 3px;
+    border-color: midnightblue;
+    
 
 }

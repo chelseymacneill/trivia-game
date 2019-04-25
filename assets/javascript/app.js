@@ -24,16 +24,13 @@ $(document).ready(function() {
   var correctAnswers = 0;
   var incorrectAnswers = 0;
   var unansweredQuestions = 0;
-  var timeRemaining = 16;
+  var timeRemaining = 10;
   var intervalID;
   var questionIndex = 0;
   var answered = false // used to control the timer based on user answereing
   var correct;
   
-  
   //==================== Function Delclarations ===============================
-  
-  
   function startGame() {
     console.log("The game has begun") 
     // reset user stats to zeros
@@ -45,10 +42,10 @@ $(document).ready(function() {
     $('.startButton').remove();
     
   }
-  
+  // 
   function loadQuestionsAndAnswers () { 
-    answered = false;
-    timeRemaining = 16; 
+    answered = false; // When false the question timer runs
+    // timeRemaining = 16; This is redundant because the variable is globally scoped 
     intervalID = setInterval(timer, 1000); 
     if (answered === false) {
       timer();
@@ -64,7 +61,7 @@ $(document).ready(function() {
     
     $("h4").click(function () {
       var id = $(this).attr('id');
-      if(id === corect) {
+      if(id === correct) {
         answered = true; // This flips the timer off
         $('.question-display').text("The answer is:" + questionsAndAnswers[questionIndex].answer[correct]);
         // calls the correct answer function
@@ -95,8 +92,9 @@ $(document).ready(function() {
   
   // Function gets called when a user answers correctly
   function correctAnswers() {
-    //increments correct answers 
+    //increments correct answers when this is called
     correctAnswers++;
+    // Replace the time remaining with a message
     $('.timeRemaining').text("You're so right").css({'color': '#3D414F'});
     resetRound();
   }
@@ -105,6 +103,7 @@ $(document).ready(function() {
   function incorrectAnswer() {
     incorrectAnswers++;
     console.log(incorrectAnswers)
+    // Replace the time remaining with a message
     $('.timeRemaining').text("You're wrong!!").css({'color': '#3D414F'});
     resetRound();
   }
