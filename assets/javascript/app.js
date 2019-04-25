@@ -65,7 +65,7 @@ $(document).ready(function() {
         answered = true; // This flips the timer off
         $('.question-display').text("The answer is:" + questionsAndAnswers[questionIndex].answer[correct]);
         // calls the correct answer function
-        correctAnswers();
+        correctAnswer();
       } else {
         answered = true; // This flips the timer off
         $('question-display').text("Your answer was : " + questionsAndAnswers[questionIndex].answer[id] + "but thats wrong the right answer is" +  questionsAndAnswers[questionIndex].answer[correct]);
@@ -81,23 +81,24 @@ $(document).ready(function() {
         answered = true;
         clearInterval(intervalID);
         $('.question-display').text("THE CORRECT ANSWER IS: " + questionsAndAnswers[questionIndex].answer[correct]);
-        unAnswered();
+        unansweredQuestion();
     } else if (answered === true) {
         clearInterval(intervalID);
     } else {
         timeRemaining--;
         $('.timeRemaining').text('YOU HAVE ' + timeRemaining + ' SECONDS TO CHOOSE');
     }
-}
+};
   
   // Function gets called when a user answers correctly
-  function correctAnswers() {
+  function correctAnswer() {
     //increments correct answers when this is called
     correctAnswers++;
+    console.log(correctAnswers)
     // Replace the time remaining with a message
     $('.timeRemaining').text("You're so right").css({'color': '#3D414F'});
     resetRound();
-  }
+  };
   
   // Function gets called when a user answers incorrectly 
   function incorrectAnswer() {
@@ -106,14 +107,15 @@ $(document).ready(function() {
     // Replace the time remaining with a message
     $('.timeRemaining').text("You're wrong!!").css({'color': '#3D414F'});
     resetRound();
-  }
+  };
   
   // Function that 
-  function unansweredQuestions() {
+  function unansweredQuestion() {
     unansweredQuestions++;
+    console.log(unansweredQuestions)
     $('.timeRemaining').text("You failed to choose in time!!").css({'color': '#3D414F'});
     resetRound();
-  }
+  };
   
   
   // Function to reset to a new round
