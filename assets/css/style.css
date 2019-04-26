@@ -23,15 +23,16 @@ html, body  {border-style: solid;
     align-items: center;
   }
 
-.row { border-style: solid;
-    border-width: 3px;
-    border-color: pink;
-    margin: 20px;
+.row { 
+    height: 30%;
+    text-align: center;
 }
 
-.main-content { border-style: solid;
-    border-width: 3px;
-    border-color: midnightblue;
+.answer-image { margin-top: 15px;
+
+}
+
+.answer-display {
     
-
 }
+
