@@ -11,7 +11,7 @@ $(document).ready(function() {
   }, {
     question: "What name did Pam and Angela fight over for their babies?",
     answer: ["Charles", "Phillip", "William", "Ace"],
-    correct: "2",
+    correct: "1",
     image: ("assets//images/pamandangela.jpg")
   }, {
     question: "What resturant is Pam barred from for Life?",
@@ -74,8 +74,9 @@ $(document).ready(function() {
         correctAnswer();
       } else {
         answered = true; // This flips the timer off
-        $('question-display').text("Your answer was : " + questionsAndAnswers[questionIndex].answer[id] + "but thats wrong the right answer is" +  questionsAndAnswers[questionIndex].answer[correct]);
+        $('.question-display').text("Your answer was : " + questionsAndAnswers[questionIndex].answer[id] + "but thats wrong the right answer is" +  questionsAndAnswers[questionIndex].answer[correct]);
         // calls the wrong answer function 
+        console.log("incorrect answer loop fired") // for testing
         incorrectAnswer();
       }
     });
