@@ -14,10 +14,25 @@ $(document).ready(function() {
     correct: "1",
     image: ("assets//images/pamandangela.jpg")
   }, {
+    question: "Which is the first prank Jim ever pulled on Dwight??",
+    answer: ["He dressed up as Dwight, mocking him", "He put his stapler in Jell-O", "Put his desk in the bathroom", "Makes him think it's Saurday on Friday"],
+    correct: "1",
+    image: ("assets/images/jello_stapler.jpg")
+  }, {
+    question: "What does Dwight feed Michael before the Dunder Mifflin Race for a Rabies Cure Marathon?",
+    answer: ["Noodles in Alfredo Sauce", "Brownies", "Ham sandwhiches", "Chocolate Milkshake"],
+    correct: "0",
+    image: ("assets/images/alfredo.gif")
+  },{
+    question: "Who started the fire that caused the fire deparetment to be called?",
+    answer: ["Michael", "Creed", "Stanley", "Ryan"],
+    correct: "3",
+    image: ("assets/images/ryan_fire.png")
+  }, {
     question: "What resturant is Pam barred from for Life?",
     answer: ["Chilis", "Fridays", "Applebees", "TGIFs"],
     correct: "0",
-    image: ("assets//images/pamandangela.jpg")
+    image: ("assets//images/chilis.png")
   }, {
     question: "Which of Angela's cats does Dwight freeze?",
     answer: ["Sparkles", "Sprinkles", "Fluffy", "Cupcake"],
@@ -69,12 +84,12 @@ $(document).ready(function() {
       var id = $(this).attr('id');
       if(id === correct) {
         answered = true; // This flips the timer off
-        $('.question-display').text("The answer is:" + questionsAndAnswers[questionIndex].answer[correct]);
+        $('.question-display').text("The answer was  " + questionsAndAnswers[questionIndex].answer[correct]);
         // calls the correct answer function
         correctAnswer();
       } else {
         answered = true; // This flips the timer off
-        $('.question-display').text("Your answer was : " + questionsAndAnswers[questionIndex].answer[id] + "but thats wrong the right answer is" +  questionsAndAnswers[questionIndex].answer[correct]);
+        $('.question-display').text("Your answer was  " + questionsAndAnswers[questionIndex].answer[id] + " but thats wrong the right answer is " +  questionsAndAnswers[questionIndex].answer[correct]);
         // calls the wrong answer function 
         console.log("incorrect answer loop fired") // for testing
         incorrectAnswer();
@@ -103,7 +118,7 @@ $(document).ready(function() {
     correctAnswers++;
     console.log(correctAnswers)
     // Replace the time remaining with a message
-    $('.timeRemaining').text("YOU ARE CORRECT").css({'color': '#3D414F'});
+    $('.timeRemaining').text("YOU ARE CORRECT");
     resetRound();
   };
   
@@ -112,7 +127,7 @@ $(document).ready(function() {
     incorrectAnswers++;
     console.log(incorrectAnswers)
     // Replace the time remaining with a message
-    $('.timeRemaining').text("YOU ARE INCORRECT").css({'color': '#3D414F'});
+    $('.timeRemaining').text("YOU ARE INCORRECT");
     resetRound();
   };
   
@@ -120,7 +135,7 @@ $(document).ready(function() {
   function unansweredQuestion() {
     unansweredQuestions++;
     console.log(unansweredQuestions)
-    $('.timeRemaining').text("YOU HAVE FAILED TO CHOOSE IN TIME!!").css({'color': '#3D414F'});
+    $('.timeRemaining').text("YOU HAVE FAILED TO CHOOSE IN TIME!!");
     resetRound();
   };
   
@@ -128,7 +143,7 @@ $(document).ready(function() {
   // Function to reset to a new round
   function resetRound() {
     $('.answersAll').remove();
-    $('.answer-display').append('<img class=answerImage width="150" height="150" src="' + questionsAndAnswers[questionIndex].image + '">');
+    $('.answer-display').append('<img class=answerImage src="' + questionsAndAnswers[questionIndex].image + '">');
     questionIndex++ // 
     if (questionIndex < questionsAndAnswers.length) {
       setTimeout(function () {
@@ -136,7 +151,7 @@ $(document).ready(function() {
         $('.answerImage').remove();
       }, 5000); // Removes previous answer image
     } else { setTimeout(function() {
-                $('.question').remove(); // removes previous question
+                $('.question-display').remove(); // removes previous question
                 $('.timeRemaining').remove(); // removes previous time remaining
                 $('.answerImage').remove(); // removes previous image
                 $('.answers').append('<h4 class= answersAll end>CORRECT ANSWERS: ' + correctAnswers + '</h4>');
